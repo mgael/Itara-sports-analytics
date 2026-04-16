@@ -1,1 +1,58 @@
+# ITARA Sports Analytics Platform
 
+**Professional football intelligence system for the East African market.**
+
+## 🚀 Deploy to Streamlit Community Cloud (Free)
+
+### Step 1 — Create a GitHub Repository
+1. Go to [github.com](https://github.com) and create a **new public repository** (e.g. `itara-analytics`)
+2. Upload **both files** from this folder:
+   - `app.py`
+   - `requirements.txt`
+
+### Step 2 — Deploy on Streamlit Cloud
+1. Go to [share.streamlit.io](https://share.streamlit.io)
+2. Sign in with your GitHub account
+3. Click **"New app"**
+4. Select your repository: `your-username/itara-analytics`
+5. Set **Main file path** to: `app.py`
+6. Click **"Deploy!"**
+
+> ⏱️ Deployment takes ~2 minutes. Your app will be live at:
+> `https://your-username-itara-analytics-app-xxxxxx.streamlit.app`
+
+---
+
+## 📦 Features Included
+
+| Feature | Description |
+|--------|-------------|
+| 🏠 Dashboard | KPIs, charts, radar analysis, squad overview |
+| 📊 Data Management | Excel upload, manual entry, match result logging |
+| 🏆 League Table | FIFA/UEFA points system (W=3, D=1, L=0) with charts |
+| ⚖️ Player Comparison | Side-by-side metrics + radar overlay + ITARA verdict |
+| 🧠 Coach Decision Center | Starting XI selector, risk analysis, position reports |
+| 🏥 Health Reports | Fitness monitor with availability thresholds |
+| 🤖 Agent Intelligence | xG, xA, market valuation, potential ratings |
+| 📤 Export Center | Excel (multi-sheet), PDF report, CSV |
+
+## 📐 Analytics Formulas Used
+
+- **CPR** (Composite Player Rating): `0.40×PI + 0.20×G/M + 0.15×A/M + 0.10×PassAcc + 0.10×Health + 0.05×ProgScore`
+- **Market Value**: `V = PI × κ × (1 + ΔM) × age_factor` — κ = RWF 1,250,000
+- **xG**: Shots-on-Target × conversion rate (λ=0.32)
+- **xA**: Assists weighted by pass accuracy
+- **Progressive Score**: Dribbles + Tackles per match composite
+
+## 🏟️ Excel Upload Format
+
+Your Excel file should include these columns:
+```
+Player, Team, Position, Age, Goals, Assists, Matches, Minutes_Played,
+Shots_on_Target, Pass_Accuracy, Dribbles_Completed, Tackles_Won,
+Health_Score, Performance_Index
+```
+Missing columns will be auto-filled with defaults.
+
+---
+*ITARA Sports Analytics — East African Football Intelligence*
