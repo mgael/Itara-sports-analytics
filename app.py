@@ -25,152 +25,269 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# CUSTOM CSS – dark-green stadium aesthetic
+# CUSTOM CSS – Claude AI palette
+# Warm cream bg · coral-orange accent · stone neutrals
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,600;0,800;1,300&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg:        #f5f0e8;
+    --bg-card:   #faf7f2;
+    --bg-sidebar:#1c1917;
+    --accent:    #d97757;
+    --accent-dk: #b85e3a;
+    --accent-lt: #f0c4b0;
+    --text-pri:  #1c1917;
+    --text-sec:  #57534e;
+    --text-muted:#a8a29e;
+    --border:    #e7e0d5;
+    --border-dk: #d6cfc4;
+    --success:   #2d6a4f;
+    --warning:   #92400e;
+    --danger:    #991b1b;
+    --white:     #ffffff;
+}
 
 html, body, [class*="css"] {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-pri);
 }
-h1, h2, h3, .stTitle {
-    font-family: 'Barlow Condensed', sans-serif !important;
+h1, h2, h3 {
+    font-family: 'Fraunces', serif !important;
     font-weight: 800 !important;
-    letter-spacing: 0.04em !important;
+    color: var(--text-pri) !important;
+    letter-spacing: -0.01em !important;
 }
 
-/* Main BG */
-.main { background-color: #0a0e0a; }
-.block-container { padding-top: 1.5rem !important; }
+/* ── Main background ── */
+.main, .stApp {
+    background-color: var(--bg) !important;
+}
+.block-container {
+    padding-top: 1.5rem !important;
+    background-color: var(--bg) !important;
+}
 
-/* Sidebar */
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0d1f0d 0%, #071407 100%);
-    border-right: 1px solid #1e3d1e;
+    background: var(--bg-sidebar) !important;
+    border-right: 1px solid #2c2825;
+}
+section[data-testid="stSidebar"] * {
+    color: #d6d3d1 !important;
+}
+section[data-testid="stSidebar"] .stSelectbox label,
+section[data-testid="stSidebar"] .stMetric label {
+    color: #a8a29e !important;
+}
+section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
+    color: var(--accent) !important;
+    font-weight: 700 !important;
 }
 
-/* Metrics */
+/* ── Metric cards ── */
 div[data-testid="metric-container"] {
-    background: linear-gradient(135deg, #0f2a0f, #152e15);
-    border: 1px solid #2d5a2d;
-    border-radius: 8px;
-    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    color: var(--accent) !important;
+    font-weight: 700;
+}
+div[data-testid="metric-container"] [data-testid="stMetricDelta"] {
+    color: var(--text-sec) !important;
 }
 
-/* DataFrames */
-div[data-testid="stDataFrame"] { border-radius: 8px; overflow: hidden; }
+/* ── DataFrames ── */
+div[data-testid="stDataFrame"] {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
 
-/* Buttons */
+/* ── Buttons ── */
 .stButton > button {
-    background: linear-gradient(135deg, #1a6b1a, #0f4a0f);
-    color: #e8f5e8;
-    border: 1px solid #2d8a2d;
-    border-radius: 6px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.18s ease;
+    box-shadow: 0 2px 8px rgba(217,119,87,0.25);
 }
 .stButton > button:hover {
-    background: linear-gradient(135deg, #228b22, #145214);
-    border-color: #3daf3d;
+    background: var(--accent-dk);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(45,138,45,0.3);
+    box-shadow: 0 4px 14px rgba(217,119,87,0.35);
 }
 
-/* Download buttons */
+/* ── Download buttons ── */
 .stDownloadButton > button {
-    background: linear-gradient(135deg, #1a3d6b, #0f2a4a) !important;
-    color: #e8f0ff !important;
-    border: 1px solid #2d5a8a !important;
+    background: var(--text-pri) !important;
+    color: var(--bg) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+.stDownloadButton > button:hover {
+    background: #3b302a !important;
+    transform: translateY(-1px) !important;
 }
 
-/* Form */
+/* ── Form container ── */
 div[data-testid="stForm"] {
-    background: #0d1f0d;
-    border: 1px solid #1e3d1e;
-    border-radius: 10px;
-    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
-/* Tabs */
+/* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: #0d1f0d;
-    border-radius: 8px;
-    gap: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    gap: 2px;
+    padding: 4px;
 }
 .stTabs [data-baseweb="tab"] {
     background: transparent;
-    color: #7ab87a;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    color: var(--text-sec);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 7px;
 }
 .stTabs [aria-selected="true"] {
-    background: #1a6b1a !important;
-    color: #e8f5e8 !important;
-    border-radius: 6px;
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-radius: 7px;
 }
 
-/* Selectbox / inputs */
-div[data-baseweb="select"] { background: #0d1f0d; }
+/* ── Inputs & selects ── */
+div[data-baseweb="select"] > div {
+    background: var(--bg-card) !important;
+    border-color: var(--border) !important;
+    color: var(--text-pri) !important;
+}
+input, textarea {
+    background: var(--bg-card) !important;
+    color: var(--text-pri) !important;
+    border-color: var(--border) !important;
+}
 
-/* Info/warning/success */
-div[data-testid="stAlert"] { border-radius: 8px; }
+/* ── Sliders ── */
+div[data-testid="stSlider"] [role="slider"] {
+    background: var(--accent) !important;
+}
+div[data-testid="stSlider"] [data-testid="stTickBarMin"],
+div[data-testid="stSlider"] [data-testid="stTickBarMax"] {
+    color: var(--text-muted) !important;
+}
 
+/* ── Alerts / info boxes ── */
+div[data-testid="stAlert"] {
+    border-radius: 10px !important;
+    border-left: 4px solid var(--accent) !important;
+    background: var(--bg-card) !important;
+}
+
+/* ── Dividers ── */
+hr { border-color: var(--border) !important; }
+
+/* ── Captions ── */
+.stCaption, small { color: var(--text-muted) !important; }
+
+/* ── Labels ── */
+label { color: var(--text-sec) !important; font-size: 0.85rem !important; }
+
+/* ── Progress bar ── */
+div[data-testid="stProgress"] > div > div {
+    background: linear-gradient(90deg, var(--accent), var(--accent-dk)) !important;
+    border-radius: 4px;
+}
+
+/* ── Hero banner ── */
 .hero-banner {
-    background: linear-gradient(135deg, #0a1a0a 0%, #0f2e0f 50%, #071a07 100%);
-    border: 1px solid #2d5a2d;
-    border-radius: 12px;
-    padding: 24px 32px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dk) 100%);
+    border-radius: 14px;
+    padding: 28px 36px;
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(217,119,87,0.3);
 }
 .hero-banner::before {
     content: '⚽';
     position: absolute;
-    right: 24px;
+    right: 28px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 64px;
-    opacity: 0.08;
+    font-size: 72px;
+    opacity: 0.12;
 }
 .hero-title {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Fraunces', serif;
     font-size: 2.4rem;
     font-weight: 800;
-    color: #7ddf7d;
-    letter-spacing: 0.06em;
+    color: #ffffff;
+    letter-spacing: -0.01em;
     line-height: 1.1;
     margin: 0;
 }
 .hero-sub {
-    color: #5a8a5a;
-    font-size: 0.95rem;
-    margin-top: 6px;
-    font-weight: 300;
-    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+}
+
+/* ── Subheaders ── */
+.stSubheader, [data-testid="stSubheader"] {
+    color: var(--text-pri) !important;
+    border-bottom: 2px solid var(--accent) !important;
+    padding-bottom: 6px !important;
+}
+
+/* ── Sidebar nav selectbox accent ── */
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background: #2c2825 !important;
+    border-color: #3d3530 !important;
+    color: #d6d3d1 !important;
+}
+
+.kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
 .form-badge {
     display: inline-block;
     padding: 2px 10px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    letter-spacing: 0.06em;
-}
-
-.kpi-card {
-    background: linear-gradient(135deg, #0f2a0f, #152e15);
-    border: 1px solid #2d5a2d;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    font-family: 'Sora', sans-serif;
+    letter-spacing: 0.03em;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -314,13 +431,13 @@ def generate_pro_pdf(df, league_df=None):
     styles = getSampleStyleSheet()
     title_style = ParagraphStyle('TitleStyle', parent=styles['Title'],
                                   fontSize=18, spaceAfter=4, alignment=TA_CENTER,
-                                  textColor=colors.HexColor('#1a6b1a'))
+                                  textColor=colors.HexColor('#d97757'))
     sub_style = ParagraphStyle('SubStyle', parent=styles['Normal'],
                                 fontSize=9, alignment=TA_CENTER,
-                                textColor=colors.HexColor('#555555'))
+                                textColor=colors.HexColor('#57534e'))
     h2_style = ParagraphStyle('H2Style', parent=styles['Heading2'],
                                fontSize=12, spaceBefore=14, spaceAfter=6,
-                               textColor=colors.HexColor('#0f4a0f'))
+                               textColor=colors.HexColor('#b85e3a'))
     note_style = ParagraphStyle('NoteStyle', parent=styles['Normal'],
                                  fontSize=7.5, textColor=colors.HexColor('#666666'))
     elements = []
@@ -349,7 +466,7 @@ def generate_pro_pdf(df, league_df=None):
 
     t = Table(table_data, repeatRows=1)
     t.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0f4a0f')),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#d97757')),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
@@ -371,7 +488,7 @@ def generate_pro_pdf(df, league_df=None):
             lt_data.append([str(v) for v in row.values])
         lt = Table(lt_data, repeatRows=1)
         lt.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0f4a0f')),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#d97757')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
@@ -400,9 +517,9 @@ def generate_pro_pdf(df, league_df=None):
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center; padding: 8px 0 16px 0;'>
-        <div style='font-family:"Barlow Condensed",sans-serif; font-size:1.7rem; font-weight:800;
-                    color:#7ddf7d; letter-spacing:0.1em;'>⚽ ITARA</div>
-        <div style='color:#4a7a4a; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;'>
+        <div style='font-family:"Fraunces",serif; font-size:1.8rem; font-weight:800;
+                    color:#d97757; letter-spacing:-0.01em;'>⚽ ITARA</div>
+        <div style='color:#78716c; font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;'>
             Sports Analytics Platform</div>
     </div>
     """, unsafe_allow_html=True)
@@ -466,9 +583,9 @@ if page == "🏠 Dashboard":
                 fig = px.bar(df.sort_values('CPR', ascending=False).head(10),
                              x='Player', y='CPR', color='Team',
                              title='Top 10 Players — Composite Rating (CPR)',
-                             color_discrete_sequence=px.colors.sequential.Greens_r)
-                fig.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                  paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                             color_discrete_sequence=['#d97757','#b85e3a','#92400e','#f0c4b0','#78716c'])
+                fig.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                  paper_bgcolor='#faf7f2', font_color='#1c1917',
                                   title_font_size=13)
                 st.plotly_chart(fig, use_container_width=True)
 
@@ -480,8 +597,8 @@ if page == "🏠 Dashboard":
                                       'Elite': '#00e676', 'Strong': '#69f0ae',
                                       'Developing': '#ffeb3b', 'Underperforming': '#ff5252'
                                   })
-                fig2.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                   paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                fig2.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                   paper_bgcolor='#faf7f2', font_color='#1c1917',
                                    title_font_size=13)
                 st.plotly_chart(fig2, use_container_width=True)
 
@@ -490,18 +607,18 @@ if page == "🏠 Dashboard":
                 fig3 = px.bar(df.groupby('Team')[['Goals', 'Assists']].sum().reset_index(),
                               x='Team', y=['Goals', 'Assists'], barmode='group',
                               title='Goals & Assists by Team',
-                              color_discrete_sequence=['#2e7d32', '#81c784'])
-                fig3.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                   paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                              color_discrete_sequence=['#d97757','#b85e3a'])
+                fig3.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                   paper_bgcolor='#faf7f2', font_color='#1c1917',
                                    title_font_size=13)
                 st.plotly_chart(fig3, use_container_width=True)
 
             with col4:
                 fig4 = px.histogram(df, x='Health_Score', nbins=10, color='Team',
                                     title='Fitness Distribution Across Squad',
-                                    color_discrete_sequence=px.colors.sequential.Greens)
-                fig4.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                   paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                                    color_discrete_sequence=['#f0c4b0','#d97757','#b85e3a','#92400e','#78716c'])
+                fig4.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                   paper_bgcolor='#faf7f2', font_color='#1c1917',
                                    title_font_size=13)
                 st.plotly_chart(fig4, use_container_width=True)
 
@@ -525,18 +642,18 @@ if page == "🏠 Dashboard":
                 r=values_rounded + [values_rounded[0]],
                 theta=categories + [categories[0]],
                 fill='toself',
-                fillcolor='rgba(45,138,45,0.25)',
-                line=dict(color='#2d8a2d', width=2),
+                fillcolor='rgba(217,119,87,0.18)',
+                line=dict(color='#d97757', width=2),
                 name=selected_player
             ))
             fig_radar.update_layout(
                 polar=dict(
-                    bgcolor='#0d1f0d',
-                    radialaxis=dict(visible=True, range=[0, 10], color='#4a7a4a',
-                                   gridcolor='#1e3d1e'),
-                    angularaxis=dict(color='#7ddf7d', gridcolor='#1e3d1e')
+                    bgcolor='#faf7f2',
+                    radialaxis=dict(visible=True, range=[0, 10], color='#57534e',
+                                   gridcolor='#e7e0d5'),
+                    angularaxis=dict(color='#d97757', gridcolor='#e7e0d5')
                 ),
-                paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                paper_bgcolor='#faf7f2', font_color='#1c1917',
                 title=dict(text=f"Attribute Radar — {selected_player}", font_size=15),
                 showlegend=False, height=420
             )
@@ -547,7 +664,7 @@ if page == "🏠 Dashboard":
                            'Matches', 'CPR', 'Performance_Index', 'Form', 'Health_Score']].copy()
             display.columns = ['Player', 'Team', 'Pos', 'Age', 'G', 'A', 'MP',
                                 'CPR', 'PI', 'Form', 'Fit%']
-            st.dataframe(display.style.background_gradient(subset=['CPR', 'PI'], cmap='Greens'),
+            st.dataframe(display.style.background_gradient(subset=['CPR', 'PI'], cmap='Oranges'),
                          use_container_width=True)
     else:
         st.info("⬅️ Go to **Data Management** to add players or upload an Excel sheet to get started.")
@@ -676,7 +793,7 @@ elif page == "🏆 League Table":
         def style_table(df):
             styled = df.style.apply(
                 lambda row: [
-                    'background-color: #0a3d0a; color: #7ddf7d; font-weight: bold'
+                    'background-color: #fff3ee; color: #d97757; font-weight: bold'
                     if row.name == 1 else
                     'background-color: #0a2a0a; color: #a5d6a7'
                     if row.name <= 4 else
@@ -693,14 +810,14 @@ elif page == "🏆 League Table":
         st.markdown("---")
         fig_pts = px.bar(
             league_df.reset_index(), x='Club', y='Pts',
-            color='Pts', color_continuous_scale='Greens',
+            color='Pts', color_continuous_scale='Oranges',
             title='Points Tally by Club',
             text='Pts'
         )
         fig_pts.update_traces(textposition='outside')
         fig_pts.update_layout(
-            template='plotly_dark', plot_bgcolor='#0a1a0a',
-            paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+            template='plotly_white', plot_bgcolor='#faf7f2',
+            paper_bgcolor='#faf7f2', font_color='#1c1917',
             showlegend=False, title_font_size=14
         )
         col1, col2 = st.columns(2)
@@ -714,8 +831,8 @@ elif page == "🏆 League Table":
             )
             fig_gd.update_traces(textposition='outside')
             fig_gd.update_layout(
-                template='plotly_dark', plot_bgcolor='#0a1a0a',
-                paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                template='plotly_white', plot_bgcolor='#faf7f2',
+                paper_bgcolor='#faf7f2', font_color='#1c1917',
                 showlegend=False, title_font_size=14
             )
             st.plotly_chart(fig_gd, use_container_width=True)
@@ -767,7 +884,7 @@ elif page == "⚖️ Player Comparison":
         ]
 
         c1, c2, c3 = st.columns([2, 1, 2])
-        c2.markdown("<div style='text-align:center; padding-top:32px; color:#7ddf7d; font-family:Barlow Condensed,sans-serif; font-size:1.4rem; font-weight:800;'>VS</div>", unsafe_allow_html=True)
+        c2.markdown("<div style='text-align:center; padding-top:32px; color:#7ddf7d; font-family:Fraunces,serif; font-size:1.4rem; font-weight:800;'>VS</div>", unsafe_allow_html=True)
 
         for label, field, dec in metrics:
             v1 = float(p1.get(field, 0))
@@ -800,7 +917,7 @@ elif page == "⚖️ Player Comparison":
         v2_vals = player_radar_vals(p2)
 
         fig_compare = go.Figure()
-        for vals, name, color in [(v1_vals, p1_name, '#2d8a2d'), (v2_vals, p2_name, '#1565c0')]:
+        for vals, name, color in [(v1_vals, p1_name, '#d97757'), (v2_vals, p2_name, '#57534e')]:
             fig_compare.add_trace(go.Scatterpolar(
                 r=vals + [vals[0]], theta=cats + [cats[0]],
                 fill='toself', name=name,
@@ -809,13 +926,13 @@ elif page == "⚖️ Player Comparison":
             ))
         fig_compare.update_layout(
             polar=dict(
-                bgcolor='#0d1f0d',
-                radialaxis=dict(visible=True, range=[0, 10], color='#4a7a4a', gridcolor='#1e3d1e'),
-                angularaxis=dict(color='#7ddf7d', gridcolor='#1e3d1e')
+                bgcolor='#faf7f2',
+                radialaxis=dict(visible=True, range=[0, 10], color='#57534e', gridcolor='#e7e0d5'),
+                angularaxis=dict(color='#d97757', gridcolor='#e7e0d5')
             ),
-            paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+            paper_bgcolor='#faf7f2', font_color='#1c1917',
             title=dict(text=f"Radar Comparison: {p1_name} vs {p2_name}", font_size=14),
-            height=420, legend=dict(bgcolor='#0d1f0d', bordercolor='#2d5a2d', borderwidth=1)
+            height=420, legend=dict(bgcolor='#faf7f2', bordercolor='#e7e0d5', borderwidth=1)
         )
         st.plotly_chart(fig_compare, use_container_width=True)
 
@@ -880,7 +997,7 @@ elif page == "🧠 Coach Decision Center":
                 display_cols = ['Player', 'Team', 'Position', 'CPR', 'Performance_Index',
                                 'Goals', 'Assists', 'Health_Score', 'Form', 'Availability']
                 styled = eligible[display_cols].style.background_gradient(
-                    subset=['CPR'], cmap='Greens'
+                    subset=['CPR'], cmap='Oranges'
                 ).applymap(
                     lambda v: 'color: #00e676; font-weight: bold' if v == 'Elite'
                     else 'color: #ffeb3b' if v == 'Developing'
@@ -929,8 +1046,8 @@ elif page == "🧠 Coach Decision Center":
             fig_risk = px.pie(risk_counts, names='Risk', values='Count',
                               title='Squad Risk Distribution',
                               color_discrete_sequence=['#00e676', '#ffeb3b', '#ff5252'])
-            fig_risk.update_layout(template='plotly_dark', paper_bgcolor='#0a1a0a',
-                                   font_color='#c8e6c9', title_font_size=13)
+            fig_risk.update_layout(template='plotly_white', paper_bgcolor='#faf7f2',
+                                   font_color='#1c1917', title_font_size=13)
             st.plotly_chart(fig_risk, use_container_width=True)
 
         with tab3:
@@ -950,8 +1067,8 @@ elif page == "🧠 Coach Decision Center":
                                  title='Average CPR by Position (colored by avg fitness)',
                                  text='Avg_CPR')
                 fig_pos.update_traces(textposition='outside')
-                fig_pos.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                      paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                fig_pos.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                      paper_bgcolor='#faf7f2', font_color='#1c1917',
                                       title_font_size=13)
                 st.plotly_chart(fig_pos, use_container_width=True)
     else:
@@ -1003,8 +1120,8 @@ elif page == "🏥 Health Reports":
                               annotation_text='Review Threshold (70%)')
         fig_health.add_hline(y=85, line_dash='dash', line_color='green',
                               annotation_text='Match Ready Threshold (85%)')
-        fig_health.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                  paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+        fig_health.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                  paper_bgcolor='#faf7f2', font_color='#1c1917',
                                   title_font_size=13)
         st.plotly_chart(fig_health, use_container_width=True)
         st.dataframe(health_df, use_container_width=True)
@@ -1032,7 +1149,7 @@ elif page == "🤖 Agent Intelligence":
                      'Progressive_Score', 'Market_Value_RWF']
         
         st.dataframe(
-            df[view_cols].style.background_gradient(subset=['CPR', 'Market_Value_RWF'], cmap='Greens'),
+            df[view_cols].style.background_gradient(subset=['CPR', 'Market_Value_RWF'], cmap='Oranges'),
             use_container_width=True
         )
 
@@ -1042,9 +1159,9 @@ elif page == "🤖 Agent Intelligence":
             fig_val = px.bar(df.sort_values('Market_Value_RWF', ascending=False).head(10),
                              x='Player', y='Market_Value_RWF', color='Team',
                              title='Top 10 — Estimated Market Value (RWF)',
-                             color_discrete_sequence=px.colors.sequential.Greens_r)
-            fig_val.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                   paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+                             color_discrete_sequence=['#d97757','#b85e3a','#92400e','#f0c4b0','#78716c'])
+            fig_val.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                   paper_bgcolor='#faf7f2', font_color='#1c1917',
                                    title_font_size=13)
             st.plotly_chart(fig_val, use_container_width=True)
 
@@ -1056,8 +1173,8 @@ elif page == "🤖 Agent Intelligence":
                                      'Elite': '#00e676', 'Strong': '#69f0ae',
                                      'Developing': '#ffeb3b', 'Underperforming': '#ff5252'
                                  })
-            fig_pot.update_layout(template='plotly_dark', plot_bgcolor='#0a1a0a',
-                                   paper_bgcolor='#0a1a0a', font_color='#c8e6c9',
+            fig_pot.update_layout(template='plotly_white', plot_bgcolor='#faf7f2',
+                                   paper_bgcolor='#faf7f2', font_color='#1c1917',
                                    title_font_size=13)
             st.plotly_chart(fig_pot, use_container_width=True)
     else:
