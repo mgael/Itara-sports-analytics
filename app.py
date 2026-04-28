@@ -357,7 +357,7 @@ def pg_home():
             a one-stop centre for athlete data, performance tracking, scouting intelligence,
             and strategic decision-making across the African football ecosystem.
         </p>
-        <div class="badge-rw">🇷🇼 Made in Rwanda &nbsp;·&nbsp; Vision 2050 Sport Industry Initiative</div>
+        <div class="badge-rw">🇷🇼 Made in Rwanda &nbsp;·&nbsp; 
     </div>
     """,unsafe_allow_html=True)
 
